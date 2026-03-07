@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Worker = require("../Models/worker");
 const upload = require("../middleware/upload");
+const protect = require("../middleware/auth");
 
 // CREATE worker with image
 router.post("/", upload.single("photo"), async (req, res) => {
@@ -25,7 +26,7 @@ router.post("/", upload.single("photo"), async (req, res) => {
 });
 
 // GET workers
-router.get("/", async (req, res) => {
+router.get("/",protect, async (req, res) => {
   try {
     const workers = await Worker.find().populate("location");
     res.json(workers);
