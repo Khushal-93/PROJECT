@@ -25,7 +25,7 @@ router.post("/", protect, async (req, res) => {
 });
 
 // GET attendance by worker
-router.get("/worker/:id", async (req, res) => {
+router.get("/worker/:id", protect, async (req, res) => {
   try {
     const records = await Attendance.find({ worker: req.params.id })
       .populate("worker")

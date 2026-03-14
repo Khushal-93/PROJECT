@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-
+const protect = require("../middleware/auth");
 const Salary = require("../Models/salary");
 const Worker = require("../Models/worker");
 const Attendance = require("../Models/attendance");
 
 // Generate salary
-router.post("/generate", async (req, res) => {
+router.post("/generate", protect, async (req, res) => {
   try {
     const { workerId, month, year } = req.body;
 
@@ -51,7 +51,7 @@ router.post("/generate", async (req, res) => {
 });
 
 // Get salary history
-router.get("/worker/:id", async (req, res) => {
+router.get("/worker/:id", protect, async (req, res) => {
   try {
     const salaries = await Salary.find({ worker: req.params.id }).populate(
       "worker"
@@ -63,7 +63,7 @@ router.get("/worker/:id", async (req, res) => {
 });
 
 // 💸 Mark salary as Paid
-router.patch("/pay/:salaryId", async (req, res) => {
+router.patch("/pay/:salaryId", protect, async (req, res) => {
   try {
     const { salaryId } = req.params;
     const { paymentMode } = req.body;

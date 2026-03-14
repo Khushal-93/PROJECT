@@ -6,6 +6,8 @@ const workerRoutes = require("./Routes/worker_routes");
 const attendanceRoutes = require("./Routes/attendance_routes");
 const salaryRoutes = require("./Routes/salary_routes");
 const authRoutes = require("./Routes/auth_routes");
+const dashboardRoutes = require("./Routes/dashboard_routes");
+const expenseRoutes = require("./Routes/expense_routes");
 
 // Load environment variables
 dotenv.config();
@@ -22,7 +24,8 @@ app.use(express.json());
 app.use("/api/workers", workerRoutes);
 app.use("/api/salary", salaryRoutes);
 app.use("/api/auth", authRoutes);
-
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/expenses", expenseRoutes);
 
 // Routes
 const locationRoutes = require("./Routes/location_routes");
